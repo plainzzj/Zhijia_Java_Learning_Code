@@ -1,0 +1,14 @@
+/myHello/resources/x.png
+/out/production/VSCODE/myHello/resources/x.png
+/IDEA/src/Internet/zzj.JPG
+/out/production/IDEA/Internet/zzj.JPG
+/IDEA/src/Internet/zzj1.JPG
+/IDEA/src/Internet/zzj2.JPG
+/out/production/IDEA/Internet/zzj2.JPG
+
+*.JPG
+*.png
+*.log
+*.idea
+*.vscode
+*.iml
