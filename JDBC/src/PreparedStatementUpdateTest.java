@@ -14,7 +14,7 @@ import java.util.Properties;
  查：需要返回
  */
 public class PreparedStatementUpdateTest {
-    // 添加一条数据：
+    // localhost:3306/dbtest1表中 添加一条数据：
     @Test
     public void testInsert(){
         Connection conn = null;
@@ -99,6 +99,42 @@ public class PreparedStatementUpdateTest {
             JDBCUtils.closeResource(conn, ps);
         }
 
+    }
+
+    @Test
+    public void testCommonUpdate(){
+        String sql = "delete from employees where id = ?";
+        update(sql, 1004);
+
+    }
+    // 通用的增删改操作
+    // sql中占位符的个数与我们的可变形参长度一致
+    public void update(String sql, Object ...args){
+        // 1. 获取数据库的连接 -> JDBCUtils
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            // 2. 预编译SQL语句，返回preparedstatement语句
+            ps = conn.prepareStatement(sql);
+
+            // 3. 填充占位符
+            for (int i = 0; i < args.length; i++) {
+                // 占位符从1开始，args数组的索引是0开始
+                ps.setObject(i + 1, args[i]);
+            }
+            // 4. 执行
+            ps.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }finally {
+            // 5. 资源的关闭
+            JDBCUtils.closeResource(conn, ps);
+        }
 
     }
 }
