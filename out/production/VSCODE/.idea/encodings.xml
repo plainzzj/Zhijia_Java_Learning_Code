@@ -4,5 +4,6 @@
     <file url="file://$PROJECT_DIR$/IDEA/src/File/hello.txt" charset="ISO-8859-1" />
     <file url="file://$PROJECT_DIR$/IDEA/src/File/hello_gbk.txt" charset="GBK" />
     <file url="file://$PROJECT_DIR$/IDEA/src/Reflection/jdbc.properties" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

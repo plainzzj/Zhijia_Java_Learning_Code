@@ -9,3 +9,6 @@
 *.JPG
 *.png
 *.log
+*.idea
+*.vscode
+*.iml
