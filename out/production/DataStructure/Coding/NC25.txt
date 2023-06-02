@@ -1,0 +1,68 @@
+import java.util.*;
+
+// 链表结点的定义，包括数值和下一个结点
+/*
+ * public class ListNode {
+ *   int val;
+ *   ListNode next = null;
+ * }
+ */
+
+public class Solution {
+    /**
+     *
+     * @param head ListNode类
+     * @return ListNode类
+     */
+    // 形参：链表头(不仅是头！ 还包括所有的值！ToString中只显示val，不显示next) 返回值：链表 -> head中包含值！不是一个单独的头！
+    public ListNode deleteDuplicates (ListNode head) {  // {1,1,2}
+        // write code here
+        /*
+        1. 遍历链表中的值，看是否有重复，如果有，删除
+        2. 由于头结点不能动，需要使用temp辅助结点
+        */
+        ListNode temp1 = head;
+        // System.out.println(head); // 地址
+        // System.out.println(head.val); //1
+        // System.out.println(head.next.val); //1
+        if (temp1.next != null) {
+            ListNode temp2 = temp1.next;
+            boolean flag = false;
+            while (true) {
+                if (temp2.next == null) { // 仅有一个数据，直接返回即可！
+                    break;
+                }
+                if (temp1.val == temp2.val) {
+                    // 此时，查询到有相同的值，进行删除操作！(跳跃连接，删除temp2.next)
+                    temp1.next = temp2.next;
+                }
+                // temp2进行遍历，与temp1的值进行对比！
+                temp2 = temp2.next;
+            }
+            // temp1进行遍历
+            temp1 = temp1.next;
+        }
+
+
+        // 最终需要返回一个遍历，输出所有的值
+        // while(temp1.next != null){
+        //     return tem1
+
+        // 返回所有的temp1;
+        return head; // head后永远连接第一个Node
+    }
+
+    /*
+    <identifier> expected -> return 语句需要放在函数中！
+    cannot find symbol
+    symbol:   class head
+    location: class nowcoder_32.m2.Solution(compiler.err.cant.resolve.location)
+    */
+
+    /*
+    stdout: null
+    */
+
+
+
+}
