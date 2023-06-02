@@ -54,21 +54,10 @@ public class PreparedStatementUpdateTest {
             throw new RuntimeException(e);
         } catch (SQLException e) {
             throw new RuntimeException(e);
-        }finally {
-            // 7. 资源的关闭
-            try {
-                if(ps != null)
-                    ps.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-            try {
-                if(conn != null)
-                    conn.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
+            // 7. 资源的关闭
+
+
         /*
         java.lang.RuntimeException: java.sql.SQLSyntaxErrorException: Table 'dbtest1.dbtest1' doesn't exist
         这是一个运行时异常，指示表名为'dbtest1.dbtest1'的表不存在。
@@ -78,6 +67,38 @@ public class PreparedStatementUpdateTest {
         数据库名为 dbtest1
         表名为： employees
          */
+
+    }
+
+    // 修改localhost:3306/dbtest1表中的有关记录
+    @Test
+    public void testUpdate(){
+        // 1. 获取数据库的连接 -> JDBCUtils
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = JDBCUtils.getConnection();
+            // 2. 预编译SQL语句，返回preparedstatement语句
+            String sql = "update employees set name = ? where id = ?";
+            ps = conn.prepareStatement(sql);
+
+            // 3. 填充占位符
+            ps.setString(1, "Clara");
+            ps.setObject(2, 1001);
+
+            // 4. 执行
+            ps.execute();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }finally {
+            // 5. 资源的关闭
+            JDBCUtils.closeResource(conn, ps);
+        }
+
 
     }
 }
